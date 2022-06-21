@@ -1,8 +1,11 @@
-body{
-  background: #171119;
-  color: #fff;
+*{
+    margin: 0;
+    padding: 0;
 }
-h1 {
-    color: red;
-    font-family: cursive;
+
+html,body,#app{
+    height: 100%;
+}
+body{
+    background-color: var(--semi-color-bg-1);
 }

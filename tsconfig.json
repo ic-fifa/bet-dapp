@@ -1,17 +1,17 @@
 {
-    "compilerOptions": {
-      "target": "ES5",
-      "module": "ESNEXT",
-      "moduleResolution": "Node",
-      "allowSyntheticDefaultImports": true,
-      "resolveJsonModule": true,
-      "experimentalDecorators": true,
-      "downlevelIteration": true,
-      "jsx": "react-jsx",
-      "lib": ["ESNEXT", "DOM"],
-      "sourceMap": true,
-      "outDir": "./dist/",
-      "baseUrl": "./src"
-    },
-    "include": ["src/**/*"]
-  }
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "ESNEXT",
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "downlevelIteration": true,
+    "jsx": "react-jsx",
+    "lib": ["ESNEXT", "DOM"],
+    "sourceMap": true,
+    "outDir": "./dist/",
+    "baseUrl": "src"
+  },
+  "include": ["src"]
+}
