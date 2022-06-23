@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>EX3_logo_3_300</title>
+    <defs>
+        <linearGradient x1="52.3156334%" y1="27.8768621%" x2="36.2657175%" y2="78.1978872%" id="linearGradient-1">
+            <stop stop-color="#0DCEF2" offset="0%"></stop>
+            <stop stop-color="#BCDD3C" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="65.0962204%" y1="81.1514319%" x2="62.1692254%" y2="26.787537%" id="linearGradient-2">
+            <stop stop-color="#FFDD00" offset="0%"></stop>
+            <stop stop-color="#EA1ED1" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="EX3_logo" transform="translate(-2260.000000, -4952.000000)">
+            <g id="编组-18备份-2" transform="translate(2006.000000, 0.000000)">
+                <g id="编组-7备份" transform="translate(4.000000, 4802.000000)">
+                    <g id="EX3_logo_3_300" transform="translate(250.000000, 150.000000)">
+                        <rect id="矩形" x="0" y="0" width="300" height="300"></rect>
+                        <g id="编组-23" transform="translate(0.000000, 28.000000)" fill-rule="nonzero">
+                            <polygon id="路径" fill="url(#linearGradient-1)" points="150 40.0183145 300 0 232.184237 121.999958 300 244 149.98235 204.125757 150 168.81036 230.369119 189.816391 192.671976 122 230.369119 54.1825668 150 75.4480966"></polygon>
+                            <polygon id="路径备份-59" fill="url(#linearGradient-2)" points="67.814803 121.999958 0 0 150 40.0183145 150 75.4480966 69.6299208 54.1825668 107.328024 122 69.6299208 189.816391 150 168.81036 150 204.240142 2.18249615e-13 244"></polygon>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

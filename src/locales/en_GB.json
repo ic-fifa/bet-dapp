@@ -1,0 +1,13 @@
+{
+    "test":"Testtttttttt",
+    "sidebar": {
+        "dashboard": "Dashboard",
+        "champion": "Champion",
+        "single": "Single",
+        "setting": "setting"
+    },
+    "header": {
+        "network": "switch network",
+        "connect": "connect wallet"
+    }
+}

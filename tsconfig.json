@@ -1,17 +1,37 @@
 {
   "compilerOptions": {
-    "target": "ES5",
-    "module": "ESNEXT",
-    "moduleResolution": "Node",
-    "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
     "experimentalDecorators": true,
-    "downlevelIteration": true,
-    "jsx": "react-jsx",
-    "lib": ["ESNEXT", "DOM"],
-    "sourceMap": true,
-    "outDir": "./dist/",
-    "baseUrl": "src"
+    "noImplicitAny": false,
+    "target": "es2018",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "baseUrl": "src",
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules",
+        "options": {
+          "customMatcher": ".(styl|css|scss|less|sass)$"
+        }
+      }
+    ],
+    "jsx": "react-jsx"
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }

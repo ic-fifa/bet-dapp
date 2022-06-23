@@ -7,7 +7,7 @@ export enum WalletType {
 export interface WalletAuth {
     type: WalletType;
     address: string;
-    balance?: string;
+    balance: string;
 }
 
 export interface IWalletConnector {
@@ -24,6 +24,8 @@ export interface IWalletConnector {
      * @returns {Promise<void>}
      */
     disconnect: () => Promise<void>;
+
+    getChainId: () => Promise<string>
 }
 export {
     MetaMaskWalletConnector

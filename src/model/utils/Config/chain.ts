@@ -1,4 +1,27 @@
-import { isLocalEnv, isTestNetEnv } from "./env";
+import { isMainNetEnv } from "./env";
+export const BSCTestNetWork = {
+    chainId: '0x61',
+    chainName: 'BSC-Test-Network',
+    nativeCurrency: {
+        name: 'BNB',
+        symbol: 'BNB',
+        decimals: 18
+    },
+    rpcUrls: ["https://data-seed-prebsc-2-s3.binance.org:8545"],
+    blockExplorerUrls: ["https://testnet.bscscan.com"]
+}
+
+export const BSCMainNetWork = {
+    chainId: '0x38',
+    chainName: 'Binance Smart Chain',
+    nativeCurrency: {
+        name: 'BNB',
+        symbol: 'BNB',
+        decimals: 18
+    },
+    rpcUrls: ['https://bsc-dataseed1.ninicoin.io'],
+    blockExplorerUrls: ['https://bscscan.com/']
+}
 
 export const bscTestUsdt = {
     address: "0x4F1709a58F80BFD6CC654ba5B14212849FC3284E",
@@ -24,4 +47,6 @@ export const bscUsdt = {
     ]
 }
 
-export const chain = isLocalEnv() ? bscTestUsdt : bscUsdt;
+export const BscChain = isMainNetEnv() ? bscUsdt : bscTestUsdt;
+// export const BscChain = bscUsdt;
+export const BscNewWork = isMainNetEnv() ? BSCMainNetWork : BSCTestNetWork;

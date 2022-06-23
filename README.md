@@ -1,2 +1,6 @@
-##yarn install
-npm start
+# World cup
+
+``` shell
+yarn install
+yarn start
+```

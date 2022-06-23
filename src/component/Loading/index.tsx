@@ -1,10 +1,9 @@
-import * as styles from './index.module.less';
+import { Spin } from '@douyinfe/semi-ui';
+import styles from './index.module.scss';
 export const Loading = () => {
     return (
         <div className={styles.wrap}>
-            <div className={styles['loading-border']}>
-                <span className={styles['loading-text']}>loading</span>
-            </div>
+            <Spin size="large" />
         </div>
     )
 }

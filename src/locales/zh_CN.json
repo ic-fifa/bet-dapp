@@ -1,0 +1,13 @@
+{
+    "test":"测试测试测试测试测试",
+    "sidebar": {
+        "dashboard": "首页",
+        "champion": "猜冠军",
+        "single": "单场竞猜",
+        "setting": "设置"
+    },
+    "header": {
+        "network": "切换网络",
+        "connect": "连接钱包"
+    }
+}

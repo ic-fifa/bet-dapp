@@ -1,89 +1,119 @@
 import { IWalletConnector, WalletAuth, WalletType } from ".";
 import { ethers } from "ethers";
-import { APP_NAME, chain, isLocalEnv } from "../Config";
-declare var window: any
+import { 
+    /* BscChain,  */
+    BscNewWork } from "../config";
+declare const window: any;
+const { ethereum } = window;
+
 export class MetaMaskWalletConnector implements IWalletConnector {
-    public type = WalletType.MetaMask;
+    public type: WalletType = WalletType.MetaMask;
 
     public connected: boolean = false;
 
-    constructor() {
-        this.connect();
+    checkIsConnected = async (): Promise<boolean> => {
+        if (!this.isMetaMaskInstalled()) return false;
+        return ethereum.isConnected();
     }
 
-    /**
-   * @description: check metamask
-   * @param {*}
-   * @return {bool}
-   */
-    private isMetaMask = () => {
-        const { ethereum } = window;
+    addNetwork = async (params: any) => {
+        try {
+            await ethereum.request({ method: 'wallet_addEthereumChain', params })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    addBSCNetWork = async () => {
+        await this.addNetwork([BscNewWork])
+    }
+
+    switchToOtherNetwork = async () => {
+        console.log('switchToOtherNetwork')
+        try {
+            await ethereum.request({
+                method: "wallet_addEthereumChain",
+                params: [BscNewWork]
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    private isMetaMaskInstalled = () => {
         return Boolean(ethereum && ethereum.isMetaMask);
     }
 
     private check = () => {
-        return !this.isMetaMask() ? window.open('https://metamask.io/') : true
+        return !this.isMetaMaskInstalled() ? window.open('https://metamask.io/') : true
     }
 
-    getBalance = async (signer:ethers.providers.JsonRpcSigner):Promise<string> => {
-        console.log(
-            chain.address
-        )
+    /* getBalance = async (signer) => {
         try {
-            const usdtContract = new ethers.Contract(chain.address, chain.abi, signer);
+            const usdtContract = new ethers.Contract(BscChain.address, BscChain.abi, signer);
             let usdtBalance = await usdtContract.balanceOf(await signer.getAddress());
             let symbol = await usdtContract.symbol();
             usdtBalance = ethers.utils.formatUnits(usdtBalance, 18);
             console.log(usdtBalance + symbol)
             return (usdtBalance + symbol)
+            // return "88.00USDT"
         } catch (error) {
-            console.log('getBalance',error)
+            throw new Error(`getBalance,${error}`);
+        }
+    } */
+
+    getBalance = async (signer) => {
+        return "1888.00 USDT";
+    }
+
+    /**
+     * @description: get chainid
+     * @param {*}
+     * @return {*}
+     */
+    getChainId = async () => {
+        const { ethereum } = window;
+        try {
+            const chainId = await ethereum.request({
+                method: "eth_chainId"
+            });
+            console.log(chainId)
+            return chainId
+            // handleNewChain(chainId);
+        } catch (error) {
+            throw new Error(`eth_requestAccounts,${error}`);
         }
     }
 
     accountChangedHandler = async (newAccount) => {
         const address = await newAccount.getAddress();
+        console.log(address)
         return {
             type: WalletType.MetaMask,
             address: address
         };
     }
+
     connect = async (): Promise<WalletAuth> => {
-        let address
         if (this.check() !== true) throw new Error('MetaMask not install');
-        const provider = new ethers.providers.Web3Provider(window.ethereum)
-        provider.send("eth_requestAccounts", []).then(async res => {
-			const signer = provider.getSigner();
-			// let mySignature = await signer.signMessage("Some custom message");
-            address = await signer.getAddress();
-            await this.getBalance(signer);
-		}).catch(error => {
-			throw new Error(
-                'eth_requestAccounts Error'
-            );
-		});
-        return {
-            type: WalletType.MetaMask,
-            address: address
-        };
-       /*  try {
-            const SignerProvider = await provider.send("eth_requestAccounts", []);
-            const signer:ethers.providers.JsonRpcSigner = provider.getSigner();
-            const address = await signer.getAddress();
-            const balance = await this.getBalance(signer);
+        const provider = new ethers.providers.Web3Provider(ethereum)
+        try {
+            await provider.send("eth_requestAccounts", [])
+            const signer = provider.getSigner()
+            const accountAddress = await signer.getAddress();
+            const balance = await this.getBalance(accountAddress);
             return {
                 type: WalletType.MetaMask,
-                address: address
+                address: accountAddress,
+                balance: balance
             };
         } catch (error) {
-            throw new Error(
-                'eth_requestAccounts Error'
-            );
-        } */
+            throw new Error(`eth_requestAccounts,${error}`);
+        }
     };
 
     disconnect = async () => {
-
+        console.log('MetaMask disconnect')
     };
 
 } 
