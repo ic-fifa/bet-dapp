@@ -3,7 +3,8 @@ import { action, computed, observable } from 'mobx';
 import { IWalletConnector, MetaMaskWalletConnector, WalletAuth } from './utils/connector';
 
 const WALLET_AUTH = 'walletAuth';
-
+declare const window: any;
+const { ethereum } = window;
 
 export class SessionStore {
     @observable
@@ -25,6 +26,13 @@ export class SessionStore {
             SessionStore.connector = new MetaMaskWalletConnector();
         }
         this.restoreSession();
+        ethereum.on('chainChanged', (chainId) => {
+            console.log('chainId change', chainId)
+        });
+
+        /* ethereum.on('disconnect', (error) => {
+            console.log('disconnect')
+        }); */
     }
 
     @computed get isConnected() {
