@@ -21,7 +21,7 @@ export class SessionStore {
     private localAuth?: WalletAuth;
 
     @observable
-    inviter = 'test'
+    inviter = ''
 
     private static connector: IWalletConnector;
 
@@ -30,13 +30,14 @@ export class SessionStore {
             SessionStore.connector = new MetaMaskWalletConnector();
         }
         this.restoreSession();
-        ethereum.on('chainChanged', (chainId) => {
-            console.log('chainId change', chainId)
-        });
 
-        /* ethereum.on('disconnect', (error) => {
-            console.log('disconnect')
+        /* ethereum.on('chainChanged', (chainId) => {
+            console.log('网络被切换了',chainId);
         }); */
+
+        /*  ethereum.on('disconnect', (error) => {
+             console.log('disconnect')
+         }); */
     }
 
     @computed get isConnected() {
@@ -60,30 +61,42 @@ export class SessionStore {
         }
     }
 
+    public getUserUserInfo = async (token) => {
+        const { data } = await axios.get(
+            `/api/Account/Info`,
+            { headers: { Authorization: `Bearer ${token}` } }
+        )
+        console.log('userInfo===============>', data)
+    }
+
     public connectWallet = async () => {
         this.connecting = true;
         try {
             this.localAuth = await SessionStore.connector.connect();
-            console.log(this.localAuth.address);
+
             const { data } = await axios.get(`/api/Account/Sign/${this.localAuth.address}`);
-            
-            const randomStr = `${data.data.address}${data.data.timestamp}${data.data.nonce}`;
-            console.log('data',randomStr)
+
+            const randomStr = `${data.data.address}${data.data.timestamp}${data.data.sign}`;
+
             const signedMsg = await SessionStore.connector.sign(randomStr);
-            console.log('signedMsg================>', signedMsg)
+
             const res = await axios.post('/api/Account/Login', {
                 ...data.data,
                 web_sign: signedMsg,
                 inviter_address: this.inviter || ''
             })
-            console.log('token=======================>', res.data.data.token)
-            sessionStorage.setItem(WALLET_AUTH, JSON.stringify(this.localAuth));
+
+            if (res.data.data.token) {
+                this.getUserUserInfo(res.data.data.token)
+                sessionStorage.setItem(WALLET_AUTH, JSON.stringify(this.localAuth));
+            }
         } catch (error) {
             console.log(error)
         } finally {
             this.connecting = false;
         }
     };
+
     public disconnectWallet = () => {
         if (!this.walletAuth) {
             console.debug(`wallet auth is null, it means disconnected`);

@@ -5,7 +5,7 @@ import { Loading } from "../component/Loading";
 
 const Dashboard = lazy(() => import('../page/Dashboard'));
 const Champion = lazy(() => import('../page/Champion'));
-const Deposit = lazy(() => import('../page/Deposit'));
+const DepositPage = lazy(() => import('../page/DepositPage'));
 const Withdraw = lazy(() => import('../page/Withdraw'));
 const Single = lazy(() => import('../page/Single'));
 
@@ -18,7 +18,7 @@ const AuthRoute = () => {
                     <Route path="/" element={<Dashboard />}></Route>
                     <Route path="/champion" element={<Champion />}></Route>
                     <Route path="/single" element={<Single />}></Route>
-                    <Route path="/deposit" element={<Deposit />}></Route>
+                    <Route path="/deposit" element={<DepositPage />}></Route>
                     <Route path="/withdraw" element={<Withdraw />}></Route>
                     <Route path="/login" element={<Login />}></Route>
                 </Routes>

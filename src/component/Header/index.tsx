@@ -22,12 +22,14 @@ export class Header extends PureComponent<Props>{
         setLocaleCode(code)
     }, []) */
 
-    /* const handleNewChain = () => {
+    /* handleNewChain = () => {
         console.log('网络被切换了');
     } */
+
     onLanguageChange = (code: string) => {
         this.props.onLanguageChange(code)
     }
+
     clearAccount = () => {
         console.log('first disconnect')
         session.disconnectWallet();
@@ -97,6 +99,7 @@ export class Header extends PureComponent<Props>{
                             {
                                 walletAuth ?
                                     <>
+                                        <span style={{color:"#fff"}}>{walletAuth.balance}</span>
                                         <Dropdown
                                             position={'bottomRight'}
                                             render={

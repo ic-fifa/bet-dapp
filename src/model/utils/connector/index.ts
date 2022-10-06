@@ -7,7 +7,7 @@ export enum WalletType {
 export interface WalletAuth {
     type: WalletType;
     address: string;
-    balance: string;
+    balance: any;
 }
 
 export interface IWalletConnector {
