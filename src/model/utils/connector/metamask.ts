@@ -26,6 +26,9 @@ export class MetaMaskWalletConnector implements IWalletConnector {
     @observable
     signer: Signer | undefined;
 
+    @observable
+    provider
+
     checkIsConnected = async (): Promise<boolean> => {
         if (!this.isMetaMaskInstalled()) return false;
         return ethereum.isConnected();
