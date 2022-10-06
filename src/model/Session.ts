@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { action, computed, observable } from 'mobx';
 
 import { IWalletConnector, MetaMaskWalletConnector, WalletAuth } from './utils/connector';
@@ -5,10 +6,10 @@ import { IWalletConnector, MetaMaskWalletConnector, WalletAuth } from './utils/c
 const WALLET_AUTH = 'walletAuth';
 declare const window: any;
 const { ethereum } = window;
-
+axios.defaults.baseURL = 'https://api.lucker.app';
 export class SessionStore {
     @observable
-    chain = 'nonno'
+    chain = 'chainID'
 
     @observable
     local = 'en_GB'
@@ -18,6 +19,9 @@ export class SessionStore {
 
     @observable
     private localAuth?: WalletAuth;
+
+    @observable
+    inviter = 'test'
 
     private static connector: IWalletConnector;
 
@@ -60,6 +64,19 @@ export class SessionStore {
         this.connecting = true;
         try {
             this.localAuth = await SessionStore.connector.connect();
+            console.log(this.localAuth.address);
+            const { data } = await axios.get(`/api/Account/Sign/${this.localAuth.address}`);
+            
+            const randomStr = `${data.data.address}${data.data.timestamp}${data.data.nonce}`;
+            console.log('data',randomStr)
+            const signedMsg = await SessionStore.connector.sign(randomStr);
+            console.log('signedMsg================>', signedMsg)
+            const res = await axios.post('/api/Account/Login', {
+                ...data.data,
+                web_sign: signedMsg,
+                inviter_address: this.inviter || ''
+            })
+            console.log('token=======================>', res.data.data.token)
             sessionStorage.setItem(WALLET_AUTH, JSON.stringify(this.localAuth));
         } catch (error) {
             console.log(error)

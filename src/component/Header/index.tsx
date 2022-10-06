@@ -8,7 +8,7 @@ import avatar from '../../image/nftgaga.png';
 import { MetaMaskWalletConnector } from "../../model/utils/connector";
 import session from '../../model/Session';
 import { observer } from "mobx-react";
-
+import { t } from 'i18next';
 interface Props {
     headHeight: string,
     onLanguageChange: (code: string) => void;
@@ -51,6 +51,7 @@ export class Header extends PureComponent<Props>{
     formatAddress = (walletAddress: string) => walletAddress.slice(0, 5) + '...' + walletAddress.slice(-3);
 
     render() {
+
         const { walletAuth, chainId } = session, { headHeight } = this.props;
         return (
             <div className='semi-layout-header' style={{ backgroundColor: 'var(--semi-color-bg-1)' }}>
@@ -109,7 +110,7 @@ export class Header extends PureComponent<Props>{
                                             <Tag avatarSrc={avatar} avatarShape='circle' size='large'>{this.formatAddress(walletAuth.address)}</Tag>
                                         </Dropdown>
                                     </> :
-                                    <Button type="primary" onClick={this.connectWallet}>Connect Wallet</Button>
+                                    <Button type="primary" onClick={this.connectWallet}>{t('header.connect')}</Button>
 
                             }
                         </Nav.Footer>

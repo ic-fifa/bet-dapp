@@ -6,6 +6,7 @@ import style from "./index.module.scss";
 import session from '../../model/Session';
 import { Teams } from '../../model/utils/config';
 import { BetModal } from './BetModal';
+import { t } from 'i18next';
 const Champion = () => {
 
     const [betModalVisible, setBetModalVisible] = useState<boolean>(false);
@@ -31,7 +32,7 @@ const Champion = () => {
     const { Title } = Typography
     return (
         <MainLayout>
-            <Title type="secondary" style={{ marginBottom: 20 }} heading={3}>Champion 所有猜中的玩家按投注份额平均分配2022个BNB</Title>
+            <Title type="secondary" style={{ marginBottom: 20 }} heading={3}>Champion {t('sidebar.dashboard')}</Title>
             <div className={style.listWrap}>
                 {
                     Teams.map(({ title, name, group, rating }, idx) =>

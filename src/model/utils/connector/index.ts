@@ -25,7 +25,9 @@ export interface IWalletConnector {
      */
     disconnect: () => Promise<void>;
 
-    getChainId: () => Promise<string>
+    getChainId: () => Promise<string>;
+
+    sign:(randomStr:string)=>Promise<any>;
 }
 export {
     MetaMaskWalletConnector

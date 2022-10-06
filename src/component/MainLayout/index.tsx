@@ -73,7 +73,8 @@ export const MainLayout: React.FC<Props> = (props) => {
                                     { itemKey: 'Dashboard', link: '#/', text: `${t('sidebar.dashboard')}`, icon: <IconHome size="large" /> },
                                     { itemKey: 'Champion', link: '#/champion', text: `${t('sidebar.champion')}`, icon: <IconHistogram size="large" /> },
                                     { itemKey: 'Single', link: '#/single', text: `${t('sidebar.single')}`, icon: <IconLive size="large" /> },
-                                    { itemKey: 'Setting', text: `${t('sidebar.setting')}`, icon: <IconSetting size="large" /> },
+                                    { itemKey: 'Withdraw', link: '#/withdraw', text: 'Withdraw', icon: <IconSetting size="large" /> },
+                                    { itemKey: 'Setting', text: `${t('sidebar.setting')}`, icon: <IconSetting size="large" /> }
                                 ]}
                             />
                         </Layout.Sider>
@@ -89,7 +90,7 @@ export const MainLayout: React.FC<Props> = (props) => {
                         </div>
                     </Layout>
                 </Layout>
-            </ConfigProvider>
+             </ConfigProvider>
         </LocaleProvider>
     );
 

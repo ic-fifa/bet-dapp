@@ -49,4 +49,4 @@ export const bscUsdt = {
 
 export const BscChain = isMainNetEnv() ? bscUsdt : bscTestUsdt;
 // export const BscChain = bscUsdt;
-export const BscNewWork = isMainNetEnv() ? BSCMainNetWork : BSCTestNetWork;
+export const BscNewWork = BSCMainNetWork;

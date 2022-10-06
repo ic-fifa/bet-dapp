@@ -1,8 +1,9 @@
 import { IWalletConnector, WalletAuth, WalletType } from ".";
 import { ethers } from "ethers";
-import { 
+import {
     /* BscChain,  */
-    BscNewWork } from "../config";
+    BscNewWork
+} from "../config";
 declare const window: any;
 const { ethereum } = window;
 
@@ -19,6 +20,17 @@ export class MetaMaskWalletConnector implements IWalletConnector {
     addNetwork = async (params: any) => {
         try {
             await ethereum.request({ method: 'wallet_addEthereumChain', params })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    sign = async (randomStr: string) => {
+        const provider = new ethers.providers.Web3Provider(ethereum)
+        try {
+            await provider.send("eth_requestAccounts", [])
+            const signer = provider.getSigner()
+            return await signer.signMessage(randomStr)
         } catch (error) {
             console.log(error)
         }

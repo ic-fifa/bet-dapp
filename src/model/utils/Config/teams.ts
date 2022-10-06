@@ -51,10 +51,10 @@ export const Teams = [
         group: 'B',
     },
     {
-        name: '爱尔兰',
-        title: '爱尔兰',
-        icon: 'sco.svg',
-        rating: 3,
+        name: 'Wales',
+        title: 'Wales',
+        icon: 'wal.svg',
+        rating: 2,
         group: 'B',
     },
 
